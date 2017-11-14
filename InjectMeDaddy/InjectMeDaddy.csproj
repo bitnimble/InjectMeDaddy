@@ -107,4 +107,12 @@
     <None Include="Resources\injector.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+  echo Running ILMerge...
+  "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe" /ndebug /targetplatform:4.0,"C:\Windows\Microsoft.NET\Framework64\v4.0.30319" /out:"$(ProjectDir)\bin\InjectMeDaddy.exe" /attr:"$(ProjectDir)\bin\Release\InjectMeDaddy.exe" "$(ProjectDir)\bin\Release\InjectMeDaddy.exe" "$(ProjectDir)\bin\Release\Newtonsoft.Json.dll"
+  echo  "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe" /ndebug /targetplatform:4.0,"C:\Windows\Microsoft.NET\Framework64\v4.0.30319" /out:"$(ProjectDir)\bin\InjectMeDaddy.exe" /attr:"$(ProjectDir)\bin\Release\InjectMeDaddy.exe" "$(ProjectDir)\bin\Release\InjectMeDaddy.exe" "$(ProjectDir)\bin\Release\Newtonsoft.Json.dll"
+  echo Done.
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
