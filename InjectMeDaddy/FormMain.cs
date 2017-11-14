@@ -22,6 +22,9 @@ namespace InjectMeDaddy
 			InitializeComponent();
 			listSources.DoubleClick += ListSources_DoubleClick;
 			listSources.ItemChecked += ListSources_ItemChecked;
+
+			Source magane = new Source("Magane", "Bringing LINE's stickers to Discord!", "https://raw.githubusercontent.com/Pitu/Magane/master/dist/stickers.min.js");
+			AddSource(magane);
 		}
 
 		private void ListSources_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -50,17 +53,19 @@ namespace InjectMeDaddy
 			editSource.ShowDialog();
 		}
 
+		private void AddSource(Source source)
+		{
+			ListViewItem item = new ListViewItem(new string[] { source.Name, source.Description, source.Url });
+			item.Tag = source;
+			item.Checked = source.Enabled;
+			listSources.Items.Add(item);
+			sources.Add(source);
+		}
+
 		private void btnAddSource_Click(object sender, EventArgs e)
 		{
 			FormAddSource addSource = new FormAddSource();
-			addSource.SetOkCallback(source =>
-			{
-				ListViewItem item = new ListViewItem(new string[] { source.Name, source.Description, source.Url });
-				item.Tag = source;
-				item.Checked = true;
-				listSources.Items.Add(item);
-				sources.Add(source);
-			});
+			addSource.SetOkCallback(source => AddSource(source));
 			addSource.ShowDialog();
 		}
 
@@ -86,16 +91,12 @@ namespace InjectMeDaddy
 				try
 				{
 					sourceArray = JsonConvert.DeserializeObject<Source[]>(json);
-					sources = new List<Source>(sourceArray);
+					sources = new List<Source>();
+
 					listSources.SuspendLayout();
 					listSources.Items.Clear();
 					foreach (var source in sources)
-					{
-						ListViewItem item = new ListViewItem(new string[] { source.Name, source.Description, source.Url });
-						item.Tag = source;
-						item.Checked = source.Enabled;
-						listSources.Items.Add(item);
-					}
+						AddSource(source);
 					listSources.ResumeLayout();
 				}
 				catch (Exception ex)

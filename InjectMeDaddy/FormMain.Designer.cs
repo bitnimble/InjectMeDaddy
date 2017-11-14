@@ -51,7 +51,7 @@
 			this.listSources.FullRowSelect = true;
 			this.listSources.Location = new System.Drawing.Point(12, 12);
 			this.listSources.Name = "listSources";
-			this.listSources.Size = new System.Drawing.Size(526, 281);
+			this.listSources.Size = new System.Drawing.Size(706, 281);
 			this.listSources.TabIndex = 0;
 			this.listSources.UseCompatibleStateImageBehavior = false;
 			this.listSources.View = System.Windows.Forms.View.Details;
@@ -64,12 +64,12 @@
 			// colDescription
 			// 
 			this.colDescription.Text = "Description";
-			this.colDescription.Width = 144;
+			this.colDescription.Width = 200;
 			// 
 			// colUrl
 			// 
 			this.colUrl.Text = "Url";
-			this.colUrl.Width = 300;
+			this.colUrl.Width = 402;
 			// 
 			// btnAddSource
 			// 
@@ -85,7 +85,7 @@
 			// btnInject
 			// 
 			this.btnInject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInject.Location = new System.Drawing.Point(463, 299);
+			this.btnInject.Location = new System.Drawing.Point(643, 299);
 			this.btnInject.Name = "btnInject";
 			this.btnInject.Size = new System.Drawing.Size(75, 23);
 			this.btnInject.TabIndex = 2;
@@ -95,6 +95,7 @@
 			// 
 			// btnSaveSourceList
 			// 
+			this.btnSaveSourceList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnSaveSourceList.Location = new System.Drawing.Point(93, 299);
 			this.btnSaveSourceList.Name = "btnSaveSourceList";
 			this.btnSaveSourceList.Size = new System.Drawing.Size(90, 23);
@@ -105,6 +106,7 @@
 			// 
 			// btnLoadSourceList
 			// 
+			this.btnLoadSourceList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLoadSourceList.Location = new System.Drawing.Point(189, 299);
 			this.btnLoadSourceList.Name = "btnLoadSourceList";
 			this.btnLoadSourceList.Size = new System.Drawing.Size(90, 23);
@@ -117,7 +119,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(550, 332);
+			this.ClientSize = new System.Drawing.Size(730, 332);
 			this.Controls.Add(this.btnLoadSourceList);
 			this.Controls.Add(this.btnSaveSourceList);
 			this.Controls.Add(this.btnInject);

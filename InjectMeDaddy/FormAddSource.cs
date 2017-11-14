@@ -33,7 +33,7 @@ namespace InjectMeDaddy
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			callback(new Source() { Name = txtName.Text, Url = txtUrl.Text, Description = txtDescription.Text });
+			callback(new Source(txtName.Text, txtDescription.Text, txtUrl.Text));
 			this.Close();
 		}
 
