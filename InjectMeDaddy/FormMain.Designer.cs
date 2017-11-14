@@ -125,7 +125,7 @@
 			this.Controls.Add(this.listSources);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Name = "FormMain";
-			this.Text = "InjectMeDaddy ( ͡° ͜ʖ ͡°) ";
+			this.Text = "InjectMeDaddy";
 			this.ResumeLayout(false);
 
 		}
