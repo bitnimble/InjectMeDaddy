@@ -106,17 +106,35 @@ namespace InjectMeDaddy
 			}
 		}
 		
-		private void btnInject_Click(object sender, EventArgs e)
+		private async void btnInject_Click(object sender, EventArgs e)
 		{
-			Injector injector = new Injector();
-			try
+			statusProgressBar.Style = ProgressBarStyle.Marquee;
+			statusProgressBar.MarqueeAnimationSpeed = 30;
+			TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+			TaskFactory factory = new TaskFactory(scheduler);
+
+			await Task.Run(() =>
 			{
-				injector.Inject(sources.Where(s => s.Enabled).ToArray());
-				MessageBox.Show("Done!");
-			} catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+				Injector injector = new Injector();
+				try
+				{
+					injector.Inject(sources.Where(s => s.Enabled).ToArray(), s => statusLabel.Text = s);
+
+					factory.StartNew(async () =>
+					{
+						statusProgressBar.Style = ProgressBarStyle.Continuous;
+						statusProgressBar.MarqueeAnimationSpeed = 0;
+						statusLabel.Text = "Done!";
+						MessageBox.Show("Done!");
+						await Task.Delay(1000);
+						statusLabel.Text = "";
+					});
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			});
 		}
 	}
 }

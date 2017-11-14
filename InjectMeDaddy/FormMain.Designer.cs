@@ -36,6 +36,11 @@
 			this.btnInject = new System.Windows.Forms.Button();
 			this.btnSaveSourceList = new System.Windows.Forms.Button();
 			this.btnLoadSourceList = new System.Windows.Forms.Button();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
+			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.statusSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+			this.statusStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listSources
@@ -51,7 +56,7 @@
 			this.listSources.FullRowSelect = true;
 			this.listSources.Location = new System.Drawing.Point(12, 12);
 			this.listSources.Name = "listSources";
-			this.listSources.Size = new System.Drawing.Size(706, 281);
+			this.listSources.Size = new System.Drawing.Size(706, 297);
 			this.listSources.TabIndex = 0;
 			this.listSources.UseCompatibleStateImageBehavior = false;
 			this.listSources.View = System.Windows.Forms.View.Details;
@@ -74,7 +79,7 @@
 			// btnAddSource
 			// 
 			this.btnAddSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnAddSource.Location = new System.Drawing.Point(12, 299);
+			this.btnAddSource.Location = new System.Drawing.Point(12, 315);
 			this.btnAddSource.Name = "btnAddSource";
 			this.btnAddSource.Size = new System.Drawing.Size(75, 23);
 			this.btnAddSource.TabIndex = 1;
@@ -85,7 +90,7 @@
 			// btnInject
 			// 
 			this.btnInject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInject.Location = new System.Drawing.Point(643, 299);
+			this.btnInject.Location = new System.Drawing.Point(643, 315);
 			this.btnInject.Name = "btnInject";
 			this.btnInject.Size = new System.Drawing.Size(75, 23);
 			this.btnInject.TabIndex = 2;
@@ -96,7 +101,7 @@
 			// btnSaveSourceList
 			// 
 			this.btnSaveSourceList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSaveSourceList.Location = new System.Drawing.Point(93, 299);
+			this.btnSaveSourceList.Location = new System.Drawing.Point(93, 315);
 			this.btnSaveSourceList.Name = "btnSaveSourceList";
 			this.btnSaveSourceList.Size = new System.Drawing.Size(90, 23);
 			this.btnSaveSourceList.TabIndex = 3;
@@ -107,7 +112,7 @@
 			// btnLoadSourceList
 			// 
 			this.btnLoadSourceList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnLoadSourceList.Location = new System.Drawing.Point(189, 299);
+			this.btnLoadSourceList.Location = new System.Drawing.Point(189, 315);
 			this.btnLoadSourceList.Name = "btnLoadSourceList";
 			this.btnLoadSourceList.Size = new System.Drawing.Size(90, 23);
 			this.btnLoadSourceList.TabIndex = 4;
@@ -115,20 +120,54 @@
 			this.btnLoadSourceList.UseVisualStyleBackColor = true;
 			this.btnLoadSourceList.Click += new System.EventHandler(this.btnLoadSourceList_Click);
 			// 
+			// statusStrip
+			// 
+			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel,
+            this.statusSpacer,
+            this.statusProgressBar});
+			this.statusStrip.Location = new System.Drawing.Point(0, 341);
+			this.statusStrip.Name = "statusStrip";
+			this.statusStrip.Size = new System.Drawing.Size(730, 22);
+			this.statusStrip.TabIndex = 5;
+			this.statusStrip.Text = "statusStrip1";
+			// 
+			// statusLabel
+			// 
+			this.statusLabel.Name = "statusLabel";
+			this.statusLabel.Size = new System.Drawing.Size(0, 17);
+			// 
+			// statusProgressBar
+			// 
+			this.statusProgressBar.Enabled = false;
+			this.statusProgressBar.MarqueeAnimationSpeed = 0;
+			this.statusProgressBar.Name = "statusProgressBar";
+			this.statusProgressBar.Size = new System.Drawing.Size(100, 16);
+			this.statusProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+			// 
+			// statusSpacer
+			// 
+			this.statusSpacer.Name = "statusSpacer";
+			this.statusSpacer.Size = new System.Drawing.Size(582, 17);
+			this.statusSpacer.Spring = true;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(730, 332);
+			this.ClientSize = new System.Drawing.Size(730, 363);
+			this.Controls.Add(this.statusStrip);
 			this.Controls.Add(this.btnLoadSourceList);
 			this.Controls.Add(this.btnSaveSourceList);
 			this.Controls.Add(this.btnInject);
 			this.Controls.Add(this.btnAddSource);
 			this.Controls.Add(this.listSources);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Name = "FormMain";
 			this.Text = "InjectMeDaddy";
+			this.statusStrip.ResumeLayout(false);
+			this.statusStrip.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -142,6 +181,10 @@
 		private System.Windows.Forms.Button btnInject;
 		private System.Windows.Forms.Button btnSaveSourceList;
 		private System.Windows.Forms.Button btnLoadSourceList;
+		private System.Windows.Forms.StatusStrip statusStrip;
+		private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+		private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
+		private System.Windows.Forms.ToolStripStatusLabel statusSpacer;
 	}
 }
 

@@ -11,16 +11,21 @@ namespace InjectMeDaddy
 {
 	class Injector
 	{
-		public void Inject(Source[] sources)
+		public void Inject(Source[] sources, Action<string> UpdateStatus)
 		{
+			UpdateStatus("Finding Discord process");
 			Process[] discordProcesses = GetDiscordProcess();
 			string discordExePath = GetProcessPath(discordProcesses[0].Id);
 			string resourcesFolder = Path.Combine(Path.GetDirectoryName(discordExePath), "resources");
 
+			UpdateStatus("Killing Discord");
 			try
 			{
 				foreach (var proc in discordProcesses)
+				{
 					proc.Kill();
+					proc.WaitForExit();
+				}
 			} catch (Exception ex)
 			{
 
@@ -35,17 +40,21 @@ namespace InjectMeDaddy
 			//Start with a fresh copy
 			if (File.Exists(origAppAsar))
 			{
+				UpdateStatus("Resetting to vanilla");
 				Directory.Delete(appFolder, true);
 				File.Move(origAppAsar, appAsar);
 			}
 
+			UpdateStatus("Creating injection script");
 			var sourceList = string.Join(",", sources.Select(s => "\"" + s.Url + "\""));
 			string injector = Properties.Resources.injector;
 			injector = injector.Replace("replacepluginshere", sourceList);
 
+			UpdateStatus("Processing app.asar");
 			ExtractAsar(appAsar, appFolder);
 			File.Move(appAsar, origAppAsar);
 
+			UpdateStatus("Injecting script loader");
 			string indexContents = File.ReadAllText(indexFile);
 			indexContents = indexContents.Replace("mainWindow.webContents.on('dom-ready', function () {});", injector);
 			File.WriteAllText(indexFile, indexContents);
@@ -62,7 +71,7 @@ namespace InjectMeDaddy
 
 		Process[] GetDiscordProcess()
 		{
-			Process[] processes = Process.GetProcessesByName("Discord");
+			Process[] processes = Process.GetProcesses().Where(p => p.ProcessName.StartsWith("Discord") && !p.ProcessName.EndsWith("Helper")).ToArray();
 			if (processes.Length == 0)
 				throw new Exception("Could not find Discord executable. Make sure that it is running.");
 
