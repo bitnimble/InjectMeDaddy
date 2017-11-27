@@ -23,7 +23,7 @@ namespace InjectMeDaddy
 			listSources.DoubleClick += ListSources_DoubleClick;
 			listSources.ItemChecked += ListSources_ItemChecked;
 
-			Source magane = new Source("Magane", "Bringing LINE's stickers to Discord!", "https://raw.githubusercontent.com/Pitu/Magane/master/dist/stickers.min.js");
+			Source magane = new Source("Magane", "Bringing LINE's stickers to Discord!", "https://raw.githubusercontent.com/Pitu/Magane/master/dist/stickers.min.js", SourceType.JS);
 			AddSource(magane);
 		}
 
@@ -45,8 +45,9 @@ namespace InjectMeDaddy
 			editSource.SetOkCallback(s =>
 			{
 				selectedItem.SubItems[0].Text = s.Name;
-				selectedItem.SubItems[1].Text = s.Description;
-				selectedItem.SubItems[2].Text = s.Url;
+				selectedItem.SubItems[1].Text = s.Type.ToString();
+				selectedItem.SubItems[2].Text = s.Description;
+				selectedItem.SubItems[3].Text = s.Url;
 				sources.Remove(source);
 				sources.Add(s);
 			});
@@ -55,7 +56,7 @@ namespace InjectMeDaddy
 
 		private void AddSource(Source source)
 		{
-			ListViewItem item = new ListViewItem(new string[] { source.Name, source.Description, source.Url });
+			ListViewItem item = new ListViewItem(new string[] { source.Name, source.Type.ToString(), source.Description, source.Url });
 			item.Tag = source;
 			item.Checked = source.Enabled;
 			listSources.Items.Add(item);

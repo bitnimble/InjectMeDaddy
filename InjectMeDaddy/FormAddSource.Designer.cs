@@ -34,12 +34,14 @@
 			this.txtName = new InjectMeDaddy.GhostTextbox();
 			this.txtDescription = new InjectMeDaddy.GhostTextbox();
 			this.lblDescription = new System.Windows.Forms.Label();
+			this.radioButtonJs = new System.Windows.Forms.RadioButton();
+			this.radioBtnCss = new System.Windows.Forms.RadioButton();
 			this.SuspendLayout();
 			// 
 			// btnOk
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOk.Location = new System.Drawing.Point(117, 182);
+			this.btnOk.Location = new System.Drawing.Point(117, 219);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 3;
@@ -53,15 +55,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtUrl.GhostText = "Source URL";
-			this.txtUrl.Location = new System.Drawing.Point(12, 39);
+			this.txtUrl.Location = new System.Drawing.Point(11, 69);
 			this.txtUrl.Name = "txtUrl";
-			this.txtUrl.Size = new System.Drawing.Size(261, 20);
+			this.txtUrl.Size = new System.Drawing.Size(262, 20);
 			this.txtUrl.TabIndex = 1;
 			// 
 			// btnCancel
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCancel.Location = new System.Drawing.Point(198, 182);
+			this.btnCancel.Location = new System.Drawing.Point(198, 219);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 4;
@@ -72,35 +74,60 @@
 			// txtName
 			// 
 			this.txtName.GhostText = "Name";
-			this.txtName.Location = new System.Drawing.Point(13, 13);
+			this.txtName.Location = new System.Drawing.Point(12, 43);
 			this.txtName.Name = "txtName";
-			this.txtName.Size = new System.Drawing.Size(260, 20);
+			this.txtName.Size = new System.Drawing.Size(261, 20);
 			this.txtName.TabIndex = 0;
 			// 
 			// txtDescription
 			// 
 			this.txtDescription.GhostText = "Description";
-			this.txtDescription.Location = new System.Drawing.Point(12, 82);
+			this.txtDescription.Location = new System.Drawing.Point(11, 112);
 			this.txtDescription.Multiline = true;
 			this.txtDescription.Name = "txtDescription";
-			this.txtDescription.Size = new System.Drawing.Size(261, 94);
+			this.txtDescription.Size = new System.Drawing.Size(262, 94);
 			this.txtDescription.TabIndex = 2;
 			// 
 			// lblDescription
 			// 
 			this.lblDescription.AutoSize = true;
-			this.lblDescription.Location = new System.Drawing.Point(13, 66);
+			this.lblDescription.Location = new System.Drawing.Point(13, 96);
 			this.lblDescription.Name = "lblDescription";
 			this.lblDescription.Size = new System.Drawing.Size(63, 13);
 			this.lblDescription.TabIndex = 5;
 			this.lblDescription.Text = "Description:";
+			// 
+			// radioButtonJs
+			// 
+			this.radioButtonJs.AutoSize = true;
+			this.radioButtonJs.Checked = true;
+			this.radioButtonJs.Location = new System.Drawing.Point(13, 13);
+			this.radioButtonJs.Name = "radioButtonJs";
+			this.radioButtonJs.Size = new System.Drawing.Size(73, 17);
+			this.radioButtonJs.TabIndex = 6;
+			this.radioButtonJs.TabStop = true;
+			this.radioButtonJs.Text = "Javascript";
+			this.radioButtonJs.UseVisualStyleBackColor = true;
+			// 
+			// radioBtnCss
+			// 
+			this.radioBtnCss.AutoSize = true;
+			this.radioBtnCss.Location = new System.Drawing.Point(146, 13);
+			this.radioBtnCss.Name = "radioBtnCss";
+			this.radioBtnCss.Size = new System.Drawing.Size(46, 17);
+			this.radioBtnCss.TabIndex = 7;
+			this.radioBtnCss.TabStop = true;
+			this.radioBtnCss.Text = "CSS";
+			this.radioBtnCss.UseVisualStyleBackColor = true;
 			// 
 			// FormAddSource
 			// 
 			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(285, 212);
+			this.ClientSize = new System.Drawing.Size(285, 249);
+			this.Controls.Add(this.radioBtnCss);
+			this.Controls.Add(this.radioButtonJs);
 			this.Controls.Add(this.lblDescription);
 			this.Controls.Add(this.txtDescription);
 			this.Controls.Add(this.txtName);
@@ -123,5 +150,7 @@
 		private GhostTextbox txtName;
 		private GhostTextbox txtDescription;
 		private System.Windows.Forms.Label lblDescription;
+		private System.Windows.Forms.RadioButton radioButtonJs;
+		private System.Windows.Forms.RadioButton radioBtnCss;
 	}
 }

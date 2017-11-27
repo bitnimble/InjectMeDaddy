@@ -46,9 +46,11 @@ namespace InjectMeDaddy
 			}
 
 			UpdateStatus("Creating injection script");
-			var sourceList = string.Join(",", sources.Select(s => "\"" + s.Url + "\""));
+			var jsSourceList = string.Join(",", sources.Where(s => s.Type == SourceType.JS).Select(s => "\"" + s.Url + "\""));
+			var cssSourceList = string.Join(",", sources.Where(s => s.Type == SourceType.CSS).Select(s => "\"" + s.Url + "\""));
 			string injector = Properties.Resources.injector;
-			injector = injector.Replace("replacepluginshere", sourceList);
+			injector = injector.Replace("replacejspluginshere", jsSourceList);
+			injector = injector.Replace("replacecsspluginshere", cssSourceList);
 
 			UpdateStatus("Processing app.asar");
 			ExtractAsar(appAsar, appFolder);

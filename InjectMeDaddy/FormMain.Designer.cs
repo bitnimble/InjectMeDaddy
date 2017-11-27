@@ -38,8 +38,9 @@
 			this.btnLoadSourceList = new System.Windows.Forms.Button();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-			this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
 			this.statusSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+			this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.statusStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -51,6 +52,7 @@
 			this.listSources.CheckBoxes = true;
 			this.listSources.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName,
+            this.colType,
             this.colDescription,
             this.colUrl});
 			this.listSources.FullRowSelect = true;
@@ -66,13 +68,21 @@
 			this.colName.Text = "Name";
 			this.colName.Width = 100;
 			// 
+			// colType
+			// 
+			this.colType.DisplayIndex = 1;
+			this.colType.Text = "Type";
+			this.colType.Width = 60;
+			// 
 			// colDescription
 			// 
+			this.colDescription.DisplayIndex = 2;
 			this.colDescription.Text = "Description";
 			this.colDescription.Width = 200;
 			// 
 			// colUrl
 			// 
+			this.colUrl.DisplayIndex = 3;
 			this.colUrl.Text = "Url";
 			this.colUrl.Width = 402;
 			// 
@@ -137,6 +147,12 @@
 			this.statusLabel.Name = "statusLabel";
 			this.statusLabel.Size = new System.Drawing.Size(0, 17);
 			// 
+			// statusSpacer
+			// 
+			this.statusSpacer.Name = "statusSpacer";
+			this.statusSpacer.Size = new System.Drawing.Size(613, 17);
+			this.statusSpacer.Spring = true;
+			// 
 			// statusProgressBar
 			// 
 			this.statusProgressBar.Enabled = false;
@@ -144,12 +160,6 @@
 			this.statusProgressBar.Name = "statusProgressBar";
 			this.statusProgressBar.Size = new System.Drawing.Size(100, 16);
 			this.statusProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-			// 
-			// statusSpacer
-			// 
-			this.statusSpacer.Name = "statusSpacer";
-			this.statusSpacer.Size = new System.Drawing.Size(582, 17);
-			this.statusSpacer.Spring = true;
 			// 
 			// FormMain
 			// 
@@ -185,6 +195,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel statusLabel;
 		private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
 		private System.Windows.Forms.ToolStripStatusLabel statusSpacer;
+		private System.Windows.Forms.ColumnHeader colType;
 	}
 }
 

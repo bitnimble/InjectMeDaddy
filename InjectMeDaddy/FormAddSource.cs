@@ -33,7 +33,7 @@ namespace InjectMeDaddy
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			callback(new Source(txtName.Text, txtDescription.Text, txtUrl.Text));
+			callback(new Source(txtName.Text, txtDescription.Text, txtUrl.Text, radioButtonJs.Checked ? SourceType.JS : SourceType.CSS));
 			this.Close();
 		}
 
