@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Management;
 using System.IO;
+using System.IO.Compression;
 
 namespace InjectMeDaddy
 {
@@ -35,8 +36,6 @@ namespace InjectMeDaddy
 			var origAppAsar = Path.Combine(resourcesFolder, "original_app.asar");
 			var appFolder = Path.Combine(resourcesFolder, "app");
 
-			var indexFile = Path.Combine(appFolder, "index.js");
-
 			//Start with a fresh copy
 			if (File.Exists(origAppAsar))
 			{
@@ -56,12 +55,52 @@ namespace InjectMeDaddy
 			ExtractAsar(appAsar, appFolder);
 			File.Move(appAsar, origAppAsar);
 
+			if (File.ReadAllText(Path.Combine(appFolder, "package.json")).Contains("app_bootstrap/index.js"))
+			{
+				InjectNew(resourcesFolder, injector, UpdateStatus);
+			}
+			else
+			{
+				InjectOld(appFolder, injector, UpdateStatus);
+			}
+
+			Process.Start(discordExePath);
+		}
+
+		void InjectNew(string resourcesFolder, string injector, Action<string> UpdateStatus)
+		{
+			string[] parts = resourcesFolder.Split(new[] { "app-" }, StringSplitOptions.None);
+			//replace Local with Roaming
+			parts[0] = Path.Combine(parts[0].Substring(0, parts[0].LastIndexOf("Local")), "Roaming", "discordcanary");
+
+			//replace resources with modules
+			parts[1] = Path.Combine(parts[1].Substring(0, parts[1].IndexOf("resources")), "modules");
+			
+			string mainScreen = Path.Combine(parts[0], parts[1], "discord_desktop_core", "app", "mainScreen.js");
+			string origMainScreen = mainScreen + ".orig";
+
+			//Start with a fresh copy
+			if (File.Exists(origMainScreen))
+			{
+				File.Delete(mainScreen);
+				File.Move(origMainScreen, mainScreen);
+			}
+			
+			File.Copy(mainScreen, origMainScreen, true);
+
 			UpdateStatus("Injecting script loader");
+			string indexContents = File.ReadAllText(mainScreen);
+			indexContents = indexContents.Replace("loadMainPage();", injector + "\n  loadMainPage();");
+			File.WriteAllText(mainScreen, indexContents);
+		}
+
+		void InjectOld(string appFolder, string injector, Action<string> UpdateStatus)
+		{
+			UpdateStatus("Injecting script loader");
+			var indexFile = Path.Combine(appFolder, "index.js");
 			string indexContents = File.ReadAllText(indexFile);
 			indexContents = indexContents.Replace("mainWindow.webContents.on('dom-ready', function () {});", injector);
 			File.WriteAllText(indexFile, indexContents);
-
-			Process.Start(discordExePath);
 		}
 
 		void ExtractAsar(string appAsar, string appFolder)
