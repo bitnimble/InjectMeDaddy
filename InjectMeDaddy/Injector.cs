@@ -41,7 +41,11 @@ namespace InjectMeDaddy
 			{
 				UpdateStatus("Resetting to vanilla");
 				Directory.Delete(appFolder, true);
-				File.Move(origAppAsar, appAsar);
+
+				if (File.Exists(appAsar))
+					File.Delete(origAppAsar);
+				else
+					File.Move(origAppAsar, appAsar);
 			}
 
 			UpdateStatus("Creating injection script");
@@ -75,23 +79,37 @@ namespace InjectMeDaddy
 
 			//replace resources with modules
 			parts[1] = Path.Combine(parts[1].Substring(0, parts[1].IndexOf("resources")), "modules");
-			
-			string mainScreen = Path.Combine(parts[0], parts[1], "discord_desktop_core", "app", "mainScreen.js");
-			string origMainScreen = mainScreen + ".orig";
+
+			string discordDesktopCore = Path.Combine(parts[0], parts[1], "discord_desktop_core");
+			string coreAsar = Path.Combine(discordDesktopCore, "core.asar");
+			string origCoreAsar = coreAsar + ".orig";
+			string coreFolder = Path.Combine(discordDesktopCore, "core");
 
 			//Start with a fresh copy
-			if (File.Exists(origMainScreen))
+			if (File.Exists(origCoreAsar))
 			{
-				File.Delete(mainScreen);
-				File.Move(origMainScreen, mainScreen);
+				Directory.Delete(coreFolder, true);
+
+				if (File.Exists(coreAsar))
+					File.Delete(origCoreAsar);
+				else
+					File.Move(origCoreAsar, coreAsar);
 			}
-			
-			File.Copy(mainScreen, origMainScreen, true);
+
+			UpdateStatus("Processing core.asar");
+			ExtractAsar(coreAsar, coreFolder);
+			File.Move(coreAsar, origCoreAsar);
 
 			UpdateStatus("Injecting script loader");
-			string indexContents = File.ReadAllText(mainScreen);
+			var indexFile = Path.Combine(coreFolder, "app", "mainScreen.js");
+			string indexContents = File.ReadAllText(indexFile);
 			indexContents = indexContents.Replace("loadMainPage();", injector + "\n  loadMainPage();");
-			File.WriteAllText(mainScreen, indexContents);
+			File.WriteAllText(indexFile, indexContents);
+
+			string packageFile = Path.Combine(discordDesktopCore, "index.js");
+			string packageContents = File.ReadAllText(packageFile);
+			packageContents = packageContents.Replace("./core.asar", "./core");
+			File.WriteAllText(packageFile, packageContents);
 		}
 
 		void InjectOld(string appFolder, string injector, Action<string> UpdateStatus)
