@@ -96,7 +96,7 @@ namespace InjectMeDaddy
 
 					listSources.SuspendLayout();
 					listSources.Items.Clear();
-					foreach (var source in sources)
+					foreach (var source in sourceArray)
 						AddSource(source);
 					listSources.ResumeLayout();
 				}
@@ -106,7 +106,7 @@ namespace InjectMeDaddy
 				}
 			}
 		}
-		
+
 		private async void btnInject_Click(object sender, EventArgs e)
 		{
 			statusProgressBar.Style = ProgressBarStyle.Marquee;

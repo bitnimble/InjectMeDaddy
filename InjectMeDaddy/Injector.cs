@@ -61,7 +61,8 @@ namespace InjectMeDaddy
 
 			if (File.ReadAllText(Path.Combine(appFolder, "package.json")).Contains("app_bootstrap/index.js"))
 			{
-				InjectNew(resourcesFolder, injector, UpdateStatus);
+				string lowerProcName = discordProcesses[0].ProcessName.ToLowerInvariant();
+				InjectNew(resourcesFolder, injector, UpdateStatus, lowerProcName.Contains("canary") ? "canary" : lowerProcName.Contains("ptb") ? "ptb" : "" );
 			}
 			else
 			{
@@ -71,11 +72,11 @@ namespace InjectMeDaddy
 			Process.Start(discordExePath);
 		}
 
-		void InjectNew(string resourcesFolder, string injector, Action<string> UpdateStatus)
+		void InjectNew(string resourcesFolder, string injector, Action<string> UpdateStatus, string channel)
 		{
 			string[] parts = resourcesFolder.Split(new[] { "app-" }, StringSplitOptions.None);
 			//replace Local with Roaming
-			parts[0] = Path.Combine(parts[0].Substring(0, parts[0].LastIndexOf("Local")), "Roaming", "discordcanary");
+			parts[0] = Path.Combine(parts[0].Substring(0, parts[0].LastIndexOf("Local")), "Roaming", "discord" + channel);
 
 			//replace resources with modules
 			parts[1] = Path.Combine(parts[1].Substring(0, parts[1].IndexOf("resources")), "modules");

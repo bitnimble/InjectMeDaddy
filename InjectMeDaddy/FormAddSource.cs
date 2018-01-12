@@ -21,6 +21,8 @@ namespace InjectMeDaddy
 
 		public void SetSource(Source source)
 		{
+			if (source.Type == SourceType.CSS)
+				radioBtnCss.Checked = true;
 			txtName.Text = source.Name;
 			txtUrl.Text = source.Url;
 			txtDescription.Text = source.Description;
