@@ -1,22 +1,13 @@
 mainWindow.webContents.on('dom-ready', function () {
   mainWindow.webContents.executeJavaScript(
     `
-    window._fs = require('fs');
-    window._fileWatcher = null;
-    window._styleTag = null;
-    window._request = require('request');
-
     global.jsPlugins = [replacejspluginshere];
     global.cssPlugins = [replacecsspluginshere];
     global.loadJsPlugin = function (url) {
       console.log('Loading JS plugin: ' + url);
-      if (typeof (global._request) === 'undefined')
-        global._request = require('request');
-      global._request(url, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-          eval(body);
-        }
-      })
+      fetch(url)
+        .then(resp => resp.text())
+		.then(text => eval(text));
     }
 
     global.loadCssPlugin = function (url) {
