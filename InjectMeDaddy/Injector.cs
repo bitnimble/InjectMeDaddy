@@ -104,7 +104,7 @@ namespace InjectMeDaddy
 			UpdateStatus("Bypassing CSP");
 			var indexFilePreload = Path.Combine(coreFolder, "app", "discord_native", "ipc.js");
 			string indexContentsPreload = File.ReadAllText(indexFilePreload);
-			indexContentsPreload = indexContentsPreload.Replace("var ipcRenderer = electron.ipcRenderer;", "var ipcRenderer = electron.ipcRenderer; \n\n electron.webFrame.registerURLSchemeAsBypassingCSP('https');");
+			indexContentsPreload = indexContentsPreload.Replace("const ipcRenderer = electron.ipcRenderer;", "const ipcRenderer = electron.ipcRenderer; \n\n electron.webFrame.registerURLSchemeAsBypassingCSP('https');");
 			File.WriteAllText(indexFilePreload, indexContentsPreload);
 			
 			UpdateStatus("Injecting script loader");
